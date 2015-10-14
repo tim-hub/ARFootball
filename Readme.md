@@ -19,7 +19,14 @@ This feeling is this ar application want to give you.
 ## Contribution
 - If you know about **modeling**, **coding on Unity3D**, **Vuforia**, then feel free to folk this repo and contribute your codes or models for AR Football
 - If you do not know it, but you get a cool idea, then start an issue, let's see whether it is easy to archieve
-- I'm nearlly broken, and unemployeed. So donation or give an job offer, it will be really nice.
+
+## Hire Me/Donation
+
+    I'm nearlly broken, and unemployeed. 
+- So donation 
+- Or Hire me
+
+    it will be really nice.
 
 ## About *ProjectSettings*
 I hide this folder on `.gitignore`, because there is my vuforia key there.
