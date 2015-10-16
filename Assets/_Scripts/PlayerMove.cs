@@ -3,16 +3,18 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 
-	public float maxforce;
-	public float maxVelocity;
-	public float rotateSpeed;
+	//public float maxforce;
+	public float moveVelocity;
+	//public float rotateSpeed;
 
+	public Transform football;
+	public Vector3 direction;
+
+	private bool attachFootball =false;
 	private Animator anim;
 	private Rigidbody rb;
-
-
-
-
+	private CharacterController cc;
+	private NavMeshAgent nma;
 
 
 	// Use this for initialization
@@ -20,12 +22,13 @@ public class PlayerMove : MonoBehaviour {
 
 		anim=GetComponent<Animator>();
 		rb=GetComponent<Rigidbody>();
-
+		cc=GetComponent<CharacterController>();
+		nma=GetComponent<NavMeshAgent>();
 
 	}	
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
 #if Unity_Editor
 		//keyboard move
@@ -39,7 +42,8 @@ public class PlayerMove : MonoBehaviour {
 		move=move.normalized*3f*Time.deltaTime;
 
 
-		rb.MovePosition(transform.position+move);
+		//rb.MovePosition(transform.position+move);
+		transform.position+=move;
 		//end key board move
 #endif
 
@@ -47,9 +51,11 @@ public class PlayerMove : MonoBehaviour {
 
 
 
+		cc.Move (direction*moveVelocity*Time.deltaTime);
+
 	}
-
-
+	
+	#region Touch
 	protected virtual void OnEnable()
 	{
 		// Hook into the OnSwipe event
@@ -71,34 +77,14 @@ public class PlayerMove : MonoBehaviour {
 			var swipe = finger.SwipeDelta;
 
 			Debug.Log(swipe);
-//			if (swipe.x < -Mathf.Abs(swipe.y))
-//			{
-//
-//				
-//			}
-//			
-//			if (swipe.x > Mathf.Abs(swipe.y))
-//			{
-//
-//			}
-//			
-//			if (swipe.y < -Mathf.Abs(swipe.x))
-//			{
-//
-//			}
-//			
-//			if (swipe.y > Mathf.Abs(swipe.x))
-//			{
-//
-//			}
+
 			float h=swipe.normalized.x;
 			float v=swipe.normalized.y;
 
-			// add force to move
-			rb.AddForce(-v*maxforce,0,h*maxforce);
+			//move direction
+			direction=new Vector3(-v,0f,h).normalized;
 
-
-
+			// rotate
 			float angle=Mathf.Acos(h/Mathf.Sqrt(h*h+v*v));
 
 			float a=angle/Mathf.PI*180f;
@@ -109,18 +95,10 @@ public class PlayerMove : MonoBehaviour {
 
 
 
-			//restrict the velocity, it seems that it does not work
-			Vector3 velocity=rb.velocity;
-			if(velocity.magnitude>maxVelocity){
-				float x= maxVelocity*(velocity.x/(Mathf.Sqrt(velocity.x*velocity.x+
-				                                             velocity.y*velocity.y)));
-				float z= maxVelocity*(velocity.z/(Mathf.Sqrt(velocity.x*velocity.x+
-				                                             velocity.y*velocity.y)));
-				
-				rb.velocity=new Vector3(x,0,z);
-			}
+
 		}
 	}
+	#endregion
 
 	public void Rotate(float angle){
 		Debug.Log(angle);
@@ -129,17 +107,27 @@ public class PlayerMove : MonoBehaviour {
 		Quaternion newRotation=Quaternion.Euler(new Vector3(transform.localRotation.x,
 		                                                    angle,
 		                                                    transform.localRotation.z));
-		
-		
+
 		transform.localRotation=newRotation;
 
 	}
 
+//
+//	void OnCollisionEnter(Collision collision) {
+//
+//
+//
+//		if (collision.gameObject.CompareTag("Football")){
+//	
+//			attachFootball=true;
+//		}
+//
+//		if (collision.gameObject.CompareTag("Enermy")){
+//
+//			attachFootball=false;
+//		}
+//
+//	}
 
-	public void OnFingerTap(Lean.LeanFinger finger){
-
-
-
-	}
 }
 
