@@ -3,6 +3,7 @@ using System.Collections;
 
 public class RayTest : MonoBehaviour {
 	public Camera cam;
+	public LayerMask field;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,10 +18,12 @@ public class RayTest : MonoBehaviour {
 			Ray ray=cam.ScreenPointToRay(Input.touches[0].position);
 			RaycastHit hit;
 
-			if(Physics.Raycast(ray,out hit)){
+
+
+			if(Physics.Raycast(ray,out hit,1000f, field)){
 				transform.position=hit.point;
-
-
+				
+				
 			}
 
 
