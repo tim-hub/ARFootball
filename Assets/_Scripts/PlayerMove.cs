@@ -3,10 +3,17 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 
-	public float force=200f;
-	public float maxVelocity=2f;
+	public float maxforce;
+	public float maxVelocity;
+	public float rotateSpeed;
+
 	private Animator anim;
 	private Rigidbody rb;
+
+
+
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -36,9 +43,7 @@ public class PlayerMove : MonoBehaviour {
 		//end key board move
 #endif
 
-		if(rb.velocity!=Vector3.zero){
-			Debug.Log(rb.velocity);
-		}
+
 
 
 
@@ -64,6 +69,7 @@ public class PlayerMove : MonoBehaviour {
 		{
 			// Store the swipe delta in a temp variable
 			var swipe = finger.SwipeDelta;
+
 			Debug.Log(swipe);
 //			if (swipe.x < -Mathf.Abs(swipe.y))
 //			{
@@ -85,39 +91,55 @@ public class PlayerMove : MonoBehaviour {
 //			{
 //
 //			}
-			float h=swipe.x/100f;
-			float v=swipe.y/100f;
+			float h=swipe.normalized.x;
+			float v=swipe.normalized.y;
+
+			// add force to move
+			rb.AddForce(-v*maxforce,0,h*maxforce);
 
 
 
+			float angle=Mathf.Acos(h/Mathf.Sqrt(h*h+v*v));
 
-			rb.AddForce(-v*force,0,h*force);
+			float a=angle/Mathf.PI*180f;
+			if(v>0f){
+				a=-a;
+			}
+			Rotate(a); 
 
-//			if(swipe.x<0f){
-//				Debug.Log("Move back");
-//				rb.AddForce(0,0,-force));
-//				//rb.MovePosition(transform.position+new Vector3(0f,0f,-5f));
-//
-//			}
-//			if(swipe.x>0f){
-//				Debug.Log("Move back");
-//				rb.AddForce(0,0,force);
-//				//rb.MovePosition(transform.position+new Vector3(0f,0f,-5f));
-//				
-//			}
-//			if(swipe.x>0f){
-//				Debug.Log("Move forward");
-//				rb.AddForce(0,0,200);
-//			}
-//
-//			if(swipe.y<0f){
-//				rb.AddForce(200,0,0);
-//			}
-//			if(swipe.y>0f){
-//
-//				rb.AddForce(-200,0,0);
-//			}
+
+
+			//restrict the velocity, it seems that it does not work
+			Vector3 velocity=rb.velocity;
+			if(velocity.magnitude>maxVelocity){
+				float x= maxVelocity*(velocity.x/(Mathf.Sqrt(velocity.x*velocity.x+
+				                                             velocity.y*velocity.y)));
+				float z= maxVelocity*(velocity.z/(Mathf.Sqrt(velocity.x*velocity.x+
+				                                             velocity.y*velocity.y)));
+				
+				rb.velocity=new Vector3(x,0,z);
+			}
 		}
+	}
+
+	public void Rotate(float angle){
+		Debug.Log(angle);
+		
+		
+		Quaternion newRotation=Quaternion.Euler(new Vector3(transform.localRotation.x,
+		                                                    angle,
+		                                                    transform.localRotation.z));
+		
+		
+		transform.localRotation=newRotation;
+
+	}
+
+
+	public void OnFingerTap(Lean.LeanFinger finger){
+
+
+
 	}
 }
 

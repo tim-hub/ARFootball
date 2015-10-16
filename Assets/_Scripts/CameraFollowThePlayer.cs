@@ -4,20 +4,18 @@ using System.Collections;
 public class CameraFollowThePlayer : MonoBehaviour {
 
 	public GameObject player;
-	public bool follow=true;
-
+	public float smooth=3f;   //smooth is bigger, the gollow is more quick, 0 : no follow
 	
 	private Vector3 distance;
-
-	void Start () {
-
-		distance=player.transform.position-gameObject.transform.position;
+	// Use this for initialization
+	void Start(){
+		distance=transform.position-player.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(follow){
-			gameObject.transform.position=player.transform.position-distance;
-		}
+		Vector3 pos=player.transform.position+distance;
+		
+		transform.position=Vector3.Lerp(transform.position,pos,smooth*Time.deltaTime);
 	}
 }
