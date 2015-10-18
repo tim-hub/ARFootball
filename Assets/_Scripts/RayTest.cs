@@ -23,6 +23,11 @@ public class RayTest : MonoBehaviour {
 		rb=GetComponent<Rigidbody>();
 		cc=GetComponent<CharacterController>();
 		nma=GetComponent<NavMeshAgent>();
+
+		if(cam==null||cam.isActiveAndEnabled==false ){
+
+			cam=Camera.main;
+		}
 		
 	}	
 	
@@ -32,7 +37,7 @@ public class RayTest : MonoBehaviour {
 
 #if UNITY_EDITOR
 		if(Input.GetMouseButtonDown(0)){
-			Debug.Log("lift click");
+			//Debug.Log("lift click");
 			Ray ray=cam.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
@@ -54,7 +59,7 @@ public class RayTest : MonoBehaviour {
 
 
 		if(Input.touchCount>=1){
-			Debug.Log("touch");
+			//Debug.Log("touch");
 
 
 			Ray ray=cam.ScreenPointToRay(Input.touches[0].position);
