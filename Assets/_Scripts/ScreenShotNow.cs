@@ -9,17 +9,23 @@ public class ScreenShotNow : MonoBehaviour {
 		format = "yyyy-MM-dd-HH-mm-ss"; 
 	}
 
-#if UNITY_EDITOR
+
 	// Update is called once per frame
 	void Update () {
 
-
+		#if UNITY_EDITOR
 		if(Input.GetKeyDown(KeyCode.Space)){
-			Application.CaptureScreenshot(Application.dataPath + "/" + System.DateTime.Now.ToString(format) +".png");
+			ScreenShotButton();
+		}
+		#endif
+
+		if(Input.touchCount>=2){
+
+			ScreenShotButton();
 		}
 	}
 
-#endif
+
 	public void ScreenShotButton(){
 
 		Application.CaptureScreenshot(Application.dataPath + "/" + System.DateTime.Now.ToString(format) +".png");

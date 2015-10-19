@@ -83,7 +83,7 @@ public class AIFriendMove : MonoBehaviour {
 			//go to ball
 			nma.SetDestination(ball.position);
 
-
+			//nma.SetDestination(gate.position);
 
 		}else if(ballGet){
 			nma.SetDestination(gate.position);
@@ -108,7 +108,7 @@ public class AIFriendMove : MonoBehaviour {
 			gateIn=true;
 		}
 
-		if(transform.position==target){
+		if(transform.position.z==target.z){
 			arrival=true;
 			target=GetRandomPos();
 		}
