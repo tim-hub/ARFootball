@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
 
 
 		if(numball==0){
-			Time.timeScale=0.1f;
+			//Time.timeScale=0.1f;
 
 			ShowTips();
 		}
@@ -103,8 +103,14 @@ public class GameManager : MonoBehaviour {
 		bigBall.SetActive(true);
 	}
 
-	public void HideTips(){
+	public void ButtonShowTips(){
 
+		tipsText.SetActive(true);
+		Invoke("HideTips",2f);
+	}
+
+	public void HideTips(){
+		
 		tipsText.SetActive(false);
 	}
 }
