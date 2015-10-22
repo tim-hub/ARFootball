@@ -8,7 +8,8 @@ I think no one will get it, in a real game. Because it is not allowed in the rea
 This feeling is this ar application want to give you.
 
 ## Roadmap
-
+1. AR Penalty
+2. AR Football
 
 ## How To Play
 1. Put the play ground picture on your desktop
@@ -27,3 +28,14 @@ I am unemployeed now, it will be pretty nice to give me an offer.
 
 ## About *ProjectSettings*
 I hide this folder on `.gitignore`, because there is my vuforia key there.
+
+
+# AR Penalty
+
+![kick](http://image.apkpure.com/image/screen/uno.bai.geekgame.arfootball-1=500.png)
+
+![tips](http://image.apkpure.com/image/screen/uno.bai.geekgame.arfootball-2=355.png)
+
+- Youtube  https://youtu.be/Ha7RN8ghUxw
+- [Google Play](https://play.google.com/store/apps/details?id=uno.bai.geekgame.arfootball)
+- [More](https://geekgame.bai.uno/ar-football/penalty.html) 
