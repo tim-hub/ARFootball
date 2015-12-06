@@ -39,10 +39,11 @@ public class GameManager : MonoBehaviour {
 			Application.Quit();
 
 		}
+
 		scoreText.text="Score: "+goals;
 
 
-
+		// screen shot in the fulture
 		if(Input.touchCount==3){
 			if(Input.touches[0].phase==TouchPhase.Began &&Input.touches[1].phase==TouchPhase.Began
 			   &&Input.touches[2].phase==TouchPhase.Began){
@@ -68,7 +69,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void FirstBall(){
-		Instantiate(football,new Vector3(0f,1f,4.85f),Quaternion.identity);
+		GameObject ball=Instantiate(football,new Vector3(0f,1f,4.85f),Quaternion.identity) as GameObject;
+		ball.transform.parent = this.gameObject.transform;
 
 
 	}
@@ -100,7 +102,8 @@ public class GameManager : MonoBehaviour {
 
 	public void ShowTips(){
 		tipsText.SetActive(true);
-		bigBall.SetActive(true);
+		//remove big ball
+		//bigBall.SetActive(true);
 	}
 
 	public void ButtonShowTips(){
