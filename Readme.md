@@ -1,4 +1,6 @@
 # AR Football
+## Pre
+Thank you who like this project, I truly advice you to have a look of my another AR project [Tetris AR](https://github.com/tim-hub/Tetris_AR), it is a AR demo that use the vuforia **virtual button**.
 
 ## Idea
 How about the feeling that a cameraman hold the camera to follow the player in the game.
